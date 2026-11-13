@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ | BARIGRAM SCHOOL AND COLLEGE</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Hind Siliguri for Bengali, Inter for English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maroon: {
+                            DEFAULT: '#800000',
+                            dark: '#600000',
+                            light: '#a00000',
+                            soft: '#fff5f5'
+                        },
+                        sky: {
+                            accent: '#00A8E8',
+                            light: '#e6f7ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Hind Siliguri', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', 'Inter', sans-serif;
+            background-color: #F8FAFC;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #800000;
+            border-radius: 4px;
+        }
+        /* Carousel animations */
+        .slide-fade {
+            transition: opacity 0.8s ease-in-out;
+        }
+        /* Fix for mobile half-white screen modal issue */
+        .fixed-modal-fix {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+        }
+    </style>
+</head>
+<body class="text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Top Info Bar -->
+    <div class="bg-maroon-dark text-white text-xs md:text-sm py-2 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex flex-wrap items-center justify-center gap-4 text-center sm:text-left">
+                <span><i class="fa-solid fa-graduation-cap text-yellow-400 mr-1"></i> EIIN: <strong class="font-mono">114562</strong></span>
+                <span class="hidden sm:inline">|</span>
+                <span><i class="fa-solid fa-code text-yellow-400 mr-1"></i> কলেজ কোড: <strong class="font-mono">3930</strong></span>
+                <span class="hidden md:inline">|</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-location-dot text-yellow-400 mr-1"></i> মেঘনা বাজার, নাগরপুর, টাঙ্গাইল</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="tel:01748922264" class="hover:text-yellow-300 transition-colors"><i class="fa-solid fa-phone mr-1"></i> 01748-922264</a>
+                <span>|</span>
+                <button onclick="toggleLanguage()" id="langBtn" class="bg-yellow-500 hover:bg-yellow-400 text-maroon-dark font-bold px-2 py-0.5 rounded text-xs transition">
+                    English
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header & Branding -->
+    <header class="bg-white shadow-md border-b-2 border-maroon sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo & Title -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img id="headerLogoImg" src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=150&auto=format&fit=crop&q=80" 
+                     onerror="this.src='https://placehold.co/100x100/800000/FFFFFF?text=BSC'" 
+                     alt="বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ লোগো" 
+                     class="w-14 h-14 md:w-16 md:h-16 rounded-full border-2 border-maroon object-cover shadow">
+                <div>
+                    <h1 class="text-lg md:text-2xl font-bold text-maroon leading-tight group-hover:text-maroon-light transition-colors" data-lang="collegeName" data-editable="collegeName">
+                        বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ
+                    </h1>
+                    <p class="text-xs md:text-sm text-gray-600 font-semibold tracking-wide" data-lang="collegeNameEn">
+                        BARIGRAM SCHOOL AND COLLEGE
+                    </p>
+                    <p class="text-xs text-sky-accent font-medium italic mt-0.5 hidden sm:block" data-lang="motto" data-editable="motto">
+                        "শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও।"
+                    </p>
+                </div>
+            </a>
+
+            <!-- Desktop Nav / Actions -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="bg-sky-accent hover:bg-blue-600 text-white font-medium px-4 py-2 rounded-lg shadow transition flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-file-signature"></i> <span data-lang="admissionBtn">অনলাইন ভর্তি</span>
+                </a>
+                <button onclick="openLoginModal()" class="bg-maroon hover:bg-maroon-dark text-white font-medium px-4 py-2 rounded-lg shadow transition flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-user-lock"></i> <span data-lang="loginBtn">পোর্টাল লগইন</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-maroon text-2xl p-2 focus:outline-none">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="bg-maroon text-white hidden lg:block">
+            <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-sm font-medium">
+                <div class="flex space-x-1">
+                    <a href="#" class="px-4 py-3 hover:bg-maroon-dark bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-house"></i> <span data-lang="navHome">মূলপাতা</span></a>
+                    <a href="#about" class="px-4 py-3 hover:bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-circle-info"></i> <span data-lang="navAbout">আমাদের সম্পর্কে</span></a>
+                    <a href="#leadership" class="px-4 py-3 hover:bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-users"></i> <span data-lang="navLeadership">নেতৃত্ব ও বাণী</span></a>
+                    <a href="#academics" class="px-4 py-3 hover:bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-book-open"></i> <span data-lang="navAcademics">একাডেমিক</span></a>
+                    <a href="#notices" class="px-4 py-3 hover:bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-bullhorn"></i> <span data-lang="navNotice">নোটিশ বোর্ড</span></a>
+                    <a href="#gallery" class="px-4 py-3 hover:bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-images"></i> <span data-lang="navGallery">গ্যালারি</span></a>
+                    <a href="#contact" class="px-4 py-3 hover:bg-maroon-dark flex items-center gap-1.5"><i class="fa-solid fa-envelope"></i> <span data-lang="navContact">যোগাযোগ</span></a>
+                </div>
+                <div class="text-xs text-yellow-300 font-semibold pr-2">
+                    <i class="fa-solid fa-clock mr-1"></i> <span id="liveTime">--:--:--</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-maroon text-white border-t border-maroon-dark px-4 py-3 space-y-2">
+            <a href="#" class="block py-2 border-b border-maroon-dark hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-house w-6"></i> মূলপাতা</a>
+            <a href="#about" class="block py-2 border-b border-maroon-dark hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-circle-info w-6"></i> আমাদের সম্পর্কে</a>
+            <a href="#leadership" class="block py-2 border-b border-maroon-dark hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-users w-6"></i> নেতৃত্ব ও বাণী</a>
+            <a href="#academics" class="block py-2 border-b border-maroon-dark hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-book-open w-6"></i> একাডেমিক</a>
+            <a href="#notices" class="block py-2 border-b border-maroon-dark hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-bullhorn w-6"></i> নোটিশ বোর্ড</a>
+            <a href="#gallery" class="block py-2 border-b border-maroon-dark hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-images w-6"></i> গ্যালারি</a>
+            <a href="#contact" class="block py-2 hover:text-yellow-300" onclick="toggleMobileMenu()"><i class="fa-solid fa-envelope w-6"></i> যোগাযোগ</a>
+            <div class="pt-2 flex flex-col gap-2">
+                <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="w-full text-center bg-sky-accent py-2 rounded font-medium"><i class="fa-solid fa-file-signature"></i> অনলাইন ভর্তি</a>
+                <button onclick="openLoginModal(); toggleMobileMenu();" class="w-full text-center bg-yellow-500 text-maroon-dark font-bold py-2 rounded"><i class="fa-solid fa-user-lock"></i> পোর্টাল লগইন</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Marquee Notice Ticker -->
+    <div class="bg-yellow-100 border-y border-yellow-300 text-maroon py-2 px-4 flex items-center shadow-inner">
+        <div class="bg-maroon text-white text-xs font-bold px-3 py-1 rounded-r-none rounded-l flex items-center gap-1 shrink-0 z-10 shadow">
+            <i class="fa-solid fa-bell animate-bounce"></i> <span data-lang="tickerLabel">জরুরি নোটিশ:</span>
+        </div>
+        <div class="overflow-hidden w-full relative">
+            <marquee id="tickerText" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();" class="font-semibold text-sm pt-0.5">
+                📢 এই ওয়েবসাইটি বাড়িগ্রামে স্কুলের অনিক আহমেদ তৈরি করেছে। &nbsp;&nbsp;&nbsp;&nbsp; 🎓 ৬ষ্ঠ শ্রেণির ভর্তির আবেদন শুরু হবে ১ জানুয়ারি, ২০২৭ থেকে। বিস্তারিত নোটিশ বোর্ডে দেখুন।
+            </marquee>
+        </div>
+    </div>
+
+    <!-- Hero Slider & Main Highlights -->
+    <section class="max-w-7xl mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Hero Carousel (2 Columns) -->
+            <div class="lg:col-span-2 relative rounded-2xl overflow-hidden shadow-xl bg-gray-900 group min-h-[300px] md:min-h-[420px]">
+                <div id="carousel-slides" class="relative w-full h-full min-h-[300px] md:min-h-[420px]">
+                    <!-- Slide 1 -->
+                    <div class="slide absolute inset-0 opacity-100 transition-opacity duration-1000 bg-cover bg-center" id="slide1Bg" style="background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqC-tLYtxUAHyGyYok6dNO1sM5baOpaGdqXwm_n8Ec1Yt2DOncVoH_wu6BFy0MeRHm1HKmpHhwXBh5yQy3uNx1s5XTx8E38H0aXUCff_FlmL8vM54xnmpCdxIRNS7tac3B2AnKw6oO-kJyi4cgNP6qhW07_-YaMwz3f3mcxqtsZv3dBkm_trDFexm-2Bb0/s2932/retouch_2026071812562180.jpg');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
+                            <span class="bg-maroon text-xs font-bold px-2.5 py-1 rounded w-max mb-2">ক্যাম্পাস জীবন</span>
+                            <h2 class="text-xl md:text-3xl font-bold leading-tight" data-editable="slide1Title">বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ পরিবারে আপনাকে স্বাগতম</h2>
+                            <p class="text-sm text-gray-200 mt-1" data-editable="slide1Desc">মানসম্মত শিক্ষা ও আধুনিক সুযোগ সুবিধার অনন্য সমন্বয়।</p>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1000&auto=format&fit=crop&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
+                            <span class="bg-sky-accent text-xs font-bold px-2.5 py-1 rounded w-max mb-2">একাডেমিক পরিবেশ</span>
+                            <h2 class="text-xl md:text-3xl font-bold leading-tight">ডিজিটাল ও আধুনিক পাঠদান ব্যবস্থা</h2>
+                            <p class="text-sm text-gray-200 mt-1">সুসজ্জিত ল্যাব এবং অভিজ্ঞ শিক্ষকমণ্ডলীর তত্ত্বাবধান।</p>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="slide absolute inset-0 opacity-0 transition-opacity duration-1000 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1000&auto=format&fit=crop&q=80');">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 text-white">
+                            <span class="bg-yellow-600 text-xs font-bold px-2.5 py-1 rounded w-max mb-2">সহ-শিক্ষা কার্যক্রম</span>
+                            <h2 class="text-xl md:text-3xl font-bold leading-tight">খেলাধুলা ও সাংস্কৃতিক বিকাশ</h2>
+                            <p class="text-sm text-gray-200 mt-1">শিক্ষার্থীদের শারীরিক ও মানসিক বিকাশে সর্বদা সচেষ্ট।</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slider Controls -->
+                <button onclick="prevSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button onclick="nextSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center transition opacity-0 group-hover:opacity-100">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+                <!-- Dots -->
+                <div class="absolute bottom-3 right-6 flex space-x-2">
+                    <span onclick="setSlide(0)" class="dot w-3 h-3 rounded-full bg-white cursor-pointer opacity-100"></span>
+                    <span onclick="setSlide(1)" class="dot w-3 h-3 rounded-full bg-white/50 cursor-pointer opacity-50"></span>
+                    <span onclick="setSlide(2)" class="dot w-3 h-3 rounded-full bg-white/50 cursor-pointer opacity-50"></span>
+                </div>
+            </div>
+
+            <!-- Quick Links Sidebar -->
+            <div class="bg-white rounded-2xl p-5 shadow-xl border border-gray-100 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-maroon border-b-2 border-maroon/20 pb-2 mb-4 flex items-center justify-between">
+                        <span><i class="fa-solid fa-bolt text-yellow-500 mr-2"></i>জরুরি সেবা ও লিংক</span>
+                        <span class="text-xs font-normal text-gray-500">Quick Menu</span>
+                    </h3>
+                    <div class="grid grid-cols-1 gap-2.5">
+                        <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="p-3 rounded-xl bg-maroon-soft border border-maroon/10 hover:bg-red-100 transition flex items-center gap-3 text-maroon font-semibold text-sm">
+                            <div class="w-9 h-9 rounded-lg bg-maroon text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-calendar-days"></i></div>
+                            <div>
+                                <div>ক্লাস রুটিন দেখুন</div>
+                                <div class="text-xs text-gray-500 font-normal">সকল বিষয়ের আপডেট রুটিন</div>
+                            </div>
+                        </a>
+                        <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="p-3 rounded-xl bg-sky-light border border-sky-accent/20 hover:bg-blue-100 transition flex items-center gap-3 text-sky-800 font-semibold text-sm">
+                            <div class="w-9 h-9 rounded-lg bg-sky-accent text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-book"></i></div>
+                            <div>
+                                <div>পাঠ্যক্রম ও সিলেবাস</div>
+                                <div class="text-xs text-gray-500 font-normal">২০২৬-২০২৭ শিক্ষাবর্ষ</div>
+                            </div>
+                        </a>
+                        <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="p-3 rounded-xl bg-yellow-50 border border-yellow-200 hover:bg-yellow-100 transition flex items-center gap-3 text-yellow-900 font-semibold text-sm">
+                            <div class="w-9 h-9 rounded-lg bg-yellow-600 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-award"></i></div>
+                            <div>
+                                <div>একাডেমিক ক্যালেন্ডার</div>
+                                <div class="text-xs text-gray-500 font-normal">পরীক্ষা ও ছুটির তালিকা</div>
+                            </div>
+                        </a>
+                        <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="p-3 rounded-xl bg-green-50 border border-green-200 hover:bg-green-100 transition flex items-center gap-3 text-green-900 font-semibold text-sm">
+                            <div class="w-9 h-9 rounded-lg bg-green-600 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-file-invoice"></i></div>
+                            <div>
+                                <div>ভর্তি নির্দেশিকা PDF</div>
+                                <div class="text-xs text-gray-500 font-normal">আবেদন নিয়মাবলী</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hotline Box -->
+                <div class="mt-4 p-3 bg-gradient-to-r from-maroon to-maroon-dark text-white rounded-xl text-center shadow">
+                    <p class="text-xs text-yellow-300 font-medium">যেকোনো তথ্যের জন্য সরাসরি কল করুন</p>
+                    <p class="text-lg font-bold font-mono tracking-wider mt-0.5"><i class="fa-solid fa-headset mr-1"></i> 01748-922264</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Leadership & Messages Section -->
+    <section id="leadership" class="max-w-7xl mx-auto px-4 py-10">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-maroon inline-block relative after:content-[''] after:block after:w-16 after:h-1 after:bg-sky-accent after:mx-auto after:mt-2">
+                প্রতিষ্ঠান পরিচালনা ও দিকনির্দেশনা
+            </h2>
+            <p class="text-gray-600 mt-2 text-sm">আমাদের শ্রদ্ধেয় প্রতিষ্ঠাতা ও প্রশাসনিক ব্যক্তিবর্গের বাণী</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <!-- Founder -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 flex flex-col items-center text-center hover:shadow-2xl transition duration-300">
+                <div class="relative mb-4">
+                    <img id="founderImg" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqC-tLYtxUAHyGyYok6dNO1sM5baOpaGdqXwm_n8Ec1Yt2DOncVoH_wu6BFy0MeRHm1HKmpHhwXBh5yQy3uNx1s5XTx8E38H0aXUCff_FlmL8vM54xnmpCdxIRNS7tac3B2AnKw6oO-kJyi4cgNP6qhW07_-YaMwz3f3mcxqtsZv3dBkm_trDFexm-2Bb0/s2932/retouch_2026071812562180.jpg" 
+                         alt="আলমাছ উদ্দীন" class="w-32 h-32 rounded-full object-cover border-4 border-maroon shadow-md">
+                    <span class="absolute bottom-0 right-0 bg-yellow-500 text-maroon-dark text-xs font-bold px-2 py-0.5 rounded-full shadow">প্রতিষ্ঠাতা</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800" data-editable="founderName">আলমাছ উদ্দীন</h3>
+                <p class="text-xs text-maroon font-semibold mb-3">প্রতিষ্ঠাতা ও প্রধান শিক্ষক</p>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 w-full text-sm text-gray-600 italic relative my-auto">
+                    <i class="fa-solid fa-quote-left text-maroon/20 text-2xl absolute top-2 left-2"></i>
+                    <span data-editable="founderMessage">"শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও।"</span>
+                </div>
+                <button onclick="showMessageModal('আলমাছ উদ্দীন (প্রতিষ্ঠাতা ও প্রধান শিক্ষক)', 'শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও। আমাদের মূল লক্ষ্য হল নাগরপুরের গ্রামীন অঞ্চলে মানসম্মত শিক্ষার আলো ছড়িয়ে দেওয়া এবং সুনাগরিক গড়ে তোলা।')" class="mt-4 text-xs font-bold text-sky-accent hover:underline">
+                    পূর্ণাঙ্গ বাণী পড়ুন <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Principal -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg border-2 border-maroon/20 flex flex-col items-center text-center hover:shadow-2xl transition duration-300 relative overflow-hidden">
+                <div class="absolute top-0 right-0 bg-maroon text-white text-xs font-bold px-3 py-1 rounded-bl-lg">প্রধান অভিভাবক</div>
+                <div class="relative mb-4 mt-2">
+                    <img id="principalImg" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqC-tLYtxUAHyGyYok6dNO1sM5baOpaGdqXwm_n8Ec1Yt2DOncVoH_wu6BFy0MeRHm1HKmpHhwXBh5yQy3uNx1s5XTx8E38H0aXUCff_FlmL8vM54xnmpCdxIRNS7tac3B2AnKw6oO-kJyi4cgNP6qhW07_-YaMwz3f3mcxqtsZv3dBkm_trDFexm-2Bb0/s2932/retouch_2026071812562180.jpg" 
+                         alt="প্রধান শিক্ষক" class="w-32 h-32 rounded-full object-cover border-4 border-sky-accent shadow-md">
+                </div>
+                <h3 class="text-xl font-bold text-gray-800" data-editable="principalName">আলমাছ উদ্দীন</h3>
+                <p class="text-xs text-sky-accent font-semibold mb-3">অধ্যক্ষ</p>
+                <div class="bg-maroon-soft p-4 rounded-xl border border-maroon/10 w-full text-sm text-gray-700 italic relative my-auto">
+                    <i class="fa-solid fa-quote-left text-maroon/20 text-2xl absolute top-2 left-2"></i>
+                    <span data-editable="principalMessage">"বাড়ীগ্রাম স্কুল অ্যান্ড কলেজে আপনাকে স্বাগতম। আমাদের লক্ষ্য সুশিক্ষার মাধ্যমে আদর্শ নাগরিক গড়ে তোলা।"</span>
+                </div>
+                <button onclick="showMessageModal('আলমাছ উদ্দীন (অধ্যক্ষ)', 'বাড়ীগ্রাম স্কুল অ্যান্ড কলেজে আপনাকে স্বাগতম। আমাদের লক্ষ্য সুশিক্ষার মাধ্যমে আদর্শ ও চরিত্রবান নাগরিক গড়ে তোলা। আমরা সুনির্দিষ্ট কারিকুলাম ও নিয়মানুবর্তিতার মাধ্যমে শিক্ষার্থীদের বিশ্বমানের উপযোগী করে তুলছি।')" class="mt-4 text-xs font-bold text-maroon hover:underline">
+                    পূর্ণাঙ্গ বাণী পড়ুন <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <!-- Vice Principal -->
+            <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 flex flex-col items-center text-center hover:shadow-2xl transition duration-300">
+                <div class="relative mb-4">
+                    <img id="vpImg" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhBfqJeuOxGIe3CzSqhRb0_Lh-Fl-JkybqLxG2PczmXCHbTqYxuQwGLQ6sJXYSFp2L1SMN9TJ9dXafQ2tCQSrrwLDmEIw_isMWgxe1RlVw7vIU38E4oCac0f41l7QX1fI1QB3kaEuDe3NG9WJCh5n5mKff1ckzJKepQgGz2BFHjO0s0v-J0wEygeMfh3lO-/s320/IMG_20261028_0646181.jpg" 
+                         alt="উপাধ্যক্ষ" class="w-32 h-32 rounded-full object-cover border-4 border-gray-300 shadow-md">
+                    <span class="absolute bottom-0 right-0 bg-gray-700 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow">প্রশাসন</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800" data-editable="vpName">উপাধ্যক্ষ মহোদয়</h3>
+                <p class="text-xs text-gray-500 font-semibold mb-3" data-editable="vpTitle">উপাধ্যক্ষ (MA in Arts)</p>
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 w-full text-sm text-gray-600 italic relative my-auto">
+                    <i class="fa-solid fa-quote-left text-maroon/20 text-2xl absolute top-2 left-2"></i>
+                    <span data-editable="vpMessage">"শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও।"</span>
+                </div>
+                <button onclick="showMessageModal('উপাধ্যক্ষ মহোদয়', 'শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও। শৃঙ্খলা, সময়ানুবর্তিতা এবং নীতি নৈতিকতার শিক্ষাই আমাদের কলেজের মূল চালিকাশক্তি।')" class="mt-4 text-xs font-bold text-sky-accent hover:underline">
+                    পূর্ণাঙ্গ বাণী পড়ুন <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About & Multimedia Section -->
+    <section id="about" class="bg-white py-12 border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                
+                <!-- About Info -->
+                <div class="space-y-4">
+                    <div class="inline-flex items-center gap-2 bg-maroon-soft text-maroon text-xs font-bold px-3 py-1 rounded-full">
+                        <i class="fa-solid fa-school"></i> ঐতিহ্য ও সমৃদ্ধি
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 leading-snug">
+                        বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ সম্পর্কিত তথ্য
+                    </h2>
+                    <p class="text-gray-600 text-sm md:text-base leading-relaxed" data-editable="aboutText">
+                        <strong>বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ (EIIN: 114562)</strong> হলো বাংলাদেশের শিক্ষা ব্যবস্থার নিবন্ধিত একটি ঐতিহ্যবাহী কলেজ। প্রতিষ্ঠানটি নাগরপুর, টাঙ্গাইল, ঢাকা অঞ্চলে অবস্থিত এবং সরকারি শিক্ষা কারিকুলাম অনুসরণ করে নিয়মিত পাঠদান ও শিক্ষাকার্যক্রম পরিচালনা করে আসছে।
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-center">
+                            <span class="block text-2xl font-bold text-maroon">১১৪৫৬২</span>
+                            <span class="text-xs text-gray-500">EIIN নম্বর</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-center">
+                            <span class="block text-2xl font-bold text-sky-accent">৩৯৩০</span>
+                            <span class="text-xs text-gray-500">কলেজ কোড</span>
+                        </div>
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 text-center col-span-2 sm:col-span-1">
+                            <span class="block text-2xl font-bold text-green-600">১০০%</span>
+                            <span class="text-xs text-gray-500">নিবন্ধিত ও স্বীকৃত</span>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <a href="#contact" class="inline-flex items-center gap-2 bg-maroon hover:bg-maroon-dark text-white px-5 py-2.5 rounded-lg font-medium text-sm transition">
+                            যোগাযোগ করুন <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Video Embed -->
+                <div class="space-y-3">
+                    <h3 class="text-lg font-bold text-gray-800 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-play text-red-600"></i> ভিডিও ডকুমেন্টারি ও ইভেন্ট
+                    </h3>
+                    <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-gray-100 bg-black">
+                        <iframe id="aboutVideoFrame" class="w-full h-full" 
+                                src="https://www.youtube.com/embed/FdWSlRZ6BAA" 
+                                title="বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ ভিডিও" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <p class="text-xs text-gray-500 text-center italic">ভিডিও: কলেজের ড্রোন শর্ট ভিডিও</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Academics & Departments -->
+    <section id="academics" class="max-w-7xl mx-auto px-4 py-12">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-maroon inline-block relative after:content-[''] after:block after:w-16 after:h-1 after:bg-sky-accent after:mx-auto after:mt-2">
+                আমাদের একাডেমিক বিভাগসমূহ
+            </h2>
+            <p class="text-gray-600 mt-2 text-sm">উচ্চমাধ্যমিক পর্যায়ে আমরা নিম্নের শাখা সমূহে পাঠদান পরিচালনা করি</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition border-t-4 border-blue-600">
+                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-4 font-bold"><i class="fa-solid fa-flask"></i></div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">বিজ্ঞান বিভাগ (Science)</h3>
+                <p class="text-gray-600 text-sm mb-4">পদার্থ, রসায়ন, জীববিজ্ঞান ও উচ্চতর গণিতের আধুনিক ল্যাব সুবিধা ও নিবিড় তদারকি।</p>
+                <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="text-xs font-bold text-blue-600 hover:underline inline-flex items-center gap-1">সিলেবাস ও বিষয়সমূহ <i class="fa-solid fa-external-link"></i></a>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition border-t-4 border-green-600">
+                <div class="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center text-xl mb-4 font-bold"><i class="fa-solid fa-landmark"></i></div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">মানবিক বিভাগ (Humanities)</h3>
+                <p class="text-gray-600 text-sm mb-4">ইতিহাস, পৌরনীতি, অর্থনীতি ও সমাজবিজ্ঞানে সুগভীর জ্ঞান অর্জনের উপযুক্ত পরিবেশ।</p>
+                <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="text-xs font-bold text-green-600 hover:underline inline-flex items-center gap-1">সিলেবাস ও বিষয়সমূহ <i class="fa-solid fa-external-link"></i></a>
+            </div>
+
+            <div class="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition border-t-4 border-yellow-500">
+                <div class="w-12 h-12 bg-yellow-100 text-yellow-700 rounded-xl flex items-center justify-center text-xl mb-4 font-bold"><i class="fa-solid fa-chart-line"></i></div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">ব্যবসায় শিক্ষা (Business Studies)</h3>
+                <p class="text-gray-600 text-sm mb-4">হিসাববিজ্ঞান, ফিন্যান্স ও ব্যবসায় সংগঠনের আধুনিক ব্যবহারিক শিক্ষা প্রদান।</p>
+                <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="text-xs font-bold text-yellow-700 hover:underline inline-flex items-center gap-1">সিলেবাস ও বিষয়সমূহ <i class="fa-solid fa-external-link"></i></a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Notices Section -->
+    <section id="notices" class="bg-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+                <div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-maroon">নোটিশ বোর্ড & সংবাদ</h2>
+                    <p class="text-gray-600 text-sm mt-1">সবশেষ ঘোষণা ও কলেজের খবরাখবর</p>
+                </div>
+                <div class="w-full md:w-auto">
+                    <input type="text" id="noticeSearch" onkeyup="filterNotices()" placeholder="নোটিশ খুঁজুন..." class="w-full md:w-64 px-4 py-2 rounded-lg border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon">
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden" id="noticeContainer">
+                <div class="notice-item p-4 sm:p-5 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:bg-gray-50 transition">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-maroon-soft text-maroon font-bold p-3 rounded-xl text-center shrink-0 min-w-[65px]">
+                            <span class="block text-lg leading-none">01</span>
+                            <span class="text-xs uppercase">JAN 2027</span>
+                        </div>
+                        <div>
+                            <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">ভর্তি নোটিশ</span>
+                            <h3 class="text-base sm:text-lg font-bold text-gray-800 mt-1">৬ষ্ঠ শ্রেণির ভর্তির আবেদন শুরু হবে ১ জানুয়ারি, ২০২৭ থেকে।</h3>
+                            <p class="text-xs text-gray-500 mt-1">প্রকাশের তারিখ: ৩০ নভেম্বর, ২০২৬</p>
+                        </div>
+                    </div>
+                    <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="bg-maroon hover:bg-maroon-dark text-white text-xs font-semibold px-4 py-2 rounded-lg shrink-0 transition">PDF ডাউনলোড</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section id="gallery" class="max-w-7xl mx-auto px-4 py-12">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold text-maroon inline-block relative after:content-[''] after:block after:w-16 after:h-1 after:bg-sky-accent after:mx-auto after:mt-2">
+                ফটো গ্যালারি
+            </h2>
+            <p class="text-gray-600 mt-2 text-sm">ক্যাম্পাসের চিরস্মরণীয় মুহূর্তসমূহ</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="group relative overflow-hidden rounded-xl shadow-md h-56 bg-gray-200">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqC-tLYtxUAHyGyYok6dNO1sM5baOpaGdqXwm_n8Ec1Yt2DOncVoH_wu6BFy0MeRHm1HKmpHhwXBh5yQy3uNx1s5XTx8E38H0aXUCff_FlmL8vM54xnmpCdxIRNS7tac3B2AnKw6oO-kJyi4cgNP6qhW07_-YaMwz3f3mcxqtsZv3dBkm_trDFexm-2Bb0/s2932/retouch_2026071812562180.jpg" alt="ক্যাম্পাস" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+            <div class="group relative overflow-hidden rounded-xl shadow-md h-56 bg-gray-200">
+                <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=600&auto=format&fit=crop&q=80" alt="লাইব্রেরি" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+            <div class="group relative overflow-hidden rounded-xl shadow-md h-56 bg-gray-200">
+                <img src="https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&auto=format&fit=crop&q=80" alt="ল্যাব" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contact" class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="space-y-6">
+                    <div>
+                        <span class="bg-sky-accent text-white text-xs font-bold px-3 py-1 rounded-full">যোগাযোগ করুন</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mt-2">আমাদের সাথে যুক্ত থাকুন</h2>
+                    </div>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-maroon flex items-center justify-center text-yellow-400 text-lg shrink-0"><i class="fa-solid fa-location-dot"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">প্রতিষ্ঠানের ঠিকানা:</h4>
+                                <p class="text-gray-300 mt-0.5" data-editable="contactAddress">ডাকঘর: মেঘনা বাজার, উপজেলা: নাগরপুর, জেলা: টাঙ্গাইল, ঢাকা, বাংলাদেশ</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-maroon flex items-center justify-center text-yellow-400 text-lg shrink-0"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h4 class="font-bold text-white">হেল্পলাইন / ফোন:</h4>
+                                <p class="text-gray-300 mt-0.5 font-mono" data-editable="contactPhone">01748-922264, 01309-114562</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-2xl border border-gray-700 shadow-xl">
+                    <h3 class="text-lg font-bold mb-4 text-yellow-400"><i class="fa-solid fa-paper-plane mr-2"></i>বার্তা পাঠান</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <input type="text" placeholder="আপনার নাম" required class="w-full px-3 py-2 rounded bg-gray-900 border border-gray-700 text-white text-sm">
+                        <input type="tel" placeholder="ফোন নম্বর" required class="w-full px-3 py-2 rounded bg-gray-900 border border-gray-700 text-white text-sm">
+                        <textarea rows="3" placeholder="বার্তা বা প্রশ্ন" required class="w-full px-3 py-2 rounded bg-gray-900 border border-gray-700 text-white text-sm"></textarea>
+                        <button type="submit" class="w-full bg-maroon hover:bg-maroon-light text-white font-bold py-2.5 rounded transition">বার্তা প্রেরণ করুন</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-6 border-t border-gray-800 text-xs">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-center md:text-left">
+                <p class="text-gray-300 font-semibold" data-editable="footerCopyright">© ২০২৬-২০২৭। বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ। সর্বস্বত্ব সংরক্ষিত।</p>
+                <p class="text-gray-500 text-[11px] mt-0.5">EIIN: 114562 | কলেজ কোড: 3930 | মেঘনা বাজার, নাগরপুর, টাঙ্গাইল</p>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="bg-gray-900 px-4 py-2 rounded-lg border border-gray-800 text-center md:text-right">
+                    <p class="text-gray-300">
+                        ডিজাইন ও ডেভেলপমেন্টে: 
+                        <a href="https://anikxportfolio.blogspot.com/" target="_blank" class="text-yellow-400 font-bold hover:underline">
+                            অনিক আহমেদ
+                        </a>
+                    </p>
+                </div>
+                <!-- Secret Login Icon Button -->
+                <div>
+                    <button onclick="openLoginModal()" class="text-gray-600 hover:text-yellow-400 text-sm bg-transparent border-0 cursor-pointer p-1 transition" title="Admin Login">
+                        <i class="fa-solid fa-lock"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 🔑 Password Login Modal -->
+    <div id="loginModal" class="fixed-modal-fix bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 relative shadow-2xl text-gray-800">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <div class="text-center mb-4">
+                <div class="w-12 h-12 bg-maroon text-white rounded-full flex items-center justify-center mx-auto text-xl mb-2">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h3 class="text-lg font-bold text-gray-800">অ্যাডমিন পাসওয়ার্ড দিন</h3>
+            </div>
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <input type="password" id="adminPasswordInput" placeholder="পাসওয়ার্ড লিখুন" required class="w-full px-3 py-2 rounded border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-maroon text-center tracking-widest font-mono">
+                <button type="submit" class="w-full bg-maroon hover:bg-maroon-dark text-white font-bold py-2 rounded transition text-sm">লগইন করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 🛠️ Full Customization Admin Modal (CMS Panel) -->
+    <div id="adminModal" class="fixed-modal-fix bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 relative shadow-2xl max-h-[90vh] overflow-y-auto text-gray-800">
+            <button onclick="closeAdminPanel()" class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-xl font-bold"><i class="fa-solid fa-xmark"></i></button>
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="text-xl font-bold text-maroon"><i class="fa-solid fa-sliders mr-2"></i>সম্পূর্ণ ওয়েবসাইট কাস্টমাইজেশন প্যানেল</h3>
+                <button onclick="adminLogout()" class="bg-red-600 text-white text-xs px-3 py-1.5 rounded hover:bg-red-700 font-semibold">লগআউট</button>
+            </div>
+            
+            <form id="adminForm" onsubmit="saveAdminData(event)" class="space-y-4 text-sm">
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">কলেজের নাম (বাংলা)</label>
+                    <input type="text" id="edit_collegeName" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">কলেজের মোটো (Motto)</label>
+                    <input type="text" id="edit_motto" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">মূল লোগো ইমেজ লিংক (URL)</label>
+                    <input type="text" id="edit_logoUrl" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">জরুরি নোটিশ / টীকার টেক্সট (Marquee)</label>
+                    <input type="text" id="edit_tickerText" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">মূল স্লাইডার ব্যাকগ্রাউন্ড ছবি (URL)</label>
+                    <input type="text" id="edit_slide1Bg" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">স্লাইডার শিরোনাম</label>
+                    <input type="text" id="edit_slide1Title" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">স্লাইডার বিবরণ</label>
+                    <input type="text" id="edit_slide1Desc" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">প্রতিষ্ঠাতা ও প্রধান শিক্ষকের নাম</label>
+                        <input type="text" id="edit_founderName" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">প্রতিষ্ঠাতার বাণী</label>
+                        <input type="text" id="edit_founderMessage" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">অধ্যক্ষ মহোদয়ের নাম</label>
+                        <input type="text" id="edit_principalName" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">অধ্যক্ষের বাণী</label>
+                        <input type="text" id="edit_principalMessage" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">উপাধ্যক্ষের নাম</label>
+                        <input type="text" id="edit_vpName" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-gray-700 mb-1">উপাধ্যক্ষের পদবি</label>
+                        <input type="text" id="edit_vpTitle" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">উপাধ্যক্ষের বাণী</label>
+                    <input type="text" id="edit_vpMessage" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">আমাদের সম্পর্কে বিবরণ (About Text)</label>
+                    <textarea id="edit_aboutText" rows="3" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon"></textarea>
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">যোগাযোগের ঠিকানা</label>
+                    <input type="text" id="edit_contactAddress" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+                <div>
+                    <label class="block font-semibold text-gray-700 mb-1">হেল্পলাইন ফোন নম্বর</label>
+                    <input type="text" id="edit_contactPhone" class="w-full px-3 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-maroon">
+                </div>
+
+                <div class="flex gap-3 pt-3 border-t">
+                    <button type="submit" class="flex-1 bg-maroon hover:bg-maroon-dark text-white font-bold py-2.5 rounded transition">
+                        পরিবর্তন সেভ করুন (Save Changes)
+                    </button>
+                    <button type="button" onclick="resetDefaultData()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2.5 rounded transition font-medium">
+                        রিসেট (Reset)
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-maroon text-white px-5 py-3 rounded-xl shadow-2xl z-50 hidden flex items-center gap-3 border border-yellow-400">
+        <i class="fa-solid fa-circle-check text-yellow-400 text-xl"></i>
+        <span id="toastMsg" class="text-sm font-medium">সফলভাবে আপডেট হয়েছে!</span>
+    </div>
+
+    <!-- Modals (Message & Portal Login) -->
+    <div id="messageModal" class="fixed-modal-fix bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative shadow-2xl">
+            <button onclick="closeMessageModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="modalTitle" class="text-xl font-bold text-maroon mb-2">--</h3>
+            <p id="modalBody" class="text-gray-700 text-sm leading-relaxed mb-6">--</p>
+            <button onclick="closeMessageModal()" class="bg-maroon text-white text-xs px-4 py-2 rounded">বন্ধ করুন</button>
+        </div>
+    </div>
+
+    <div id="loginModal" class="fixed-modal-fix bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl text-gray-800">
+            <button onclick="closeLoginModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-600 text-xl"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-xl font-bold mb-4 text-center">পোর্টাল লগইন</h3>
+            <form onsubmit="event.preventDefault(); closeLoginModal(); showToast('লগইন সফল!');" class="space-y-4">
+                <input type="text" placeholder="আইডি নম্বর" required class="w-full px-3 py-2 rounded border border-gray-300 text-sm">
+                <input type="password" placeholder="পাসওয়ার্ড" required class="w-full px-3 py-2 rounded border border-gray-300 text-sm">
+                <button type="submit" class="w-full bg-maroon text-white font-bold py-2 rounded text-sm">প্রবেশ করুন</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript CMS Logic -->
+    <script>
+        const ADMIN_SECRET_PASSWORD = "Anio@hmed";
+
+        const defaultData = {
+            collegeName: "বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ",
+            motto: "\"শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও।\"",
+            logoUrl: "https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=150&auto=format&fit=crop&q=80",
+            tickerText: "📢 এই ওয়েবসাইটি বাড়িগ্রামে স্কুলের অনিক আহমেদ তৈরি করেছে। &nbsp;&nbsp;&nbsp;&nbsp; 🎓 ৬ষ্ঠ শ্রেণির ভর্তির আবেদন শুরু হবে ১ জানুয়ারি, ২০২৭ থেকে। বিস্তারিত নোটিশ বোর্ডে দেখুন।",
+            slide1Bg: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiqC-tLYtxUAHyGyYok6dNO1sM5baOpaGdqXwm_n8Ec1Yt2DOncVoH_wu6BFy0MeRHm1HKmpHhwXBh5yQy3uNx1s5XTx8E38H0aXUCff_FlmL8vM54xnmpCdxIRNS7tac3B2AnKw6oO-kJyi4cgNP6qhW07_-YaMwz3f3mcxqtsZv3dBkm_trDFexm-2Bb0/s2932/retouch_2026071812562180.jpg",
+            slide1Title: "বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ পরিবারে আপনাকে স্বাগতম",
+            slide1Desc: "মানসম্মত শিক্ষা ও আধুনিক সুযোগ সুবিধার অনন্য সমন্বয়।",
+            founderName: "আলমাছ উদ্দীন",
+            founderMessage: "\"শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও।\"",
+            principalName: "আলমাছ উদ্দীন",
+            principalMessage: "\"বাড়ীগ্রাম স্কুল অ্যান্ড কলেজে আপনাকে স্বাগতম। আমাদের লক্ষ্য সুশিক্ষার মাধ্যমে আদর্শ নাগরিক গড়ে তোলা।\"",
+            vpName: "উপাধ্যক্ষ মহোদয়",
+            vpTitle: "উপাধ্যক্ষ (MA in Arts)",
+            vpMessage: "\"শিক্ষার জন্য এসো, সেবার জন্য বেরিয়ে যাও।\"",
+            aboutText: "বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ (EIIN: 114562) হলো বাংলাদেশের শিক্ষা ব্যবস্থার নিবন্ধিত একটি ঐতিহ্যবাহী কলেজ। প্রতিষ্ঠানটি নাগরপুর, টাঙ্গাইল, ঢাকা অঞ্চলে অবস্থিত এবং সরকারি শিক্ষা কারিকুলাম অনুসরণ করে নিয়মিত পাঠদান ও শিক্ষাকার্যক্রম পরিচালনা করে আসছে।",
+            contactAddress: "ডাকঘর: মেঘনা বাজার, উপজেলা: নাগরপুর, জেলা: টাঙ্গাইল, ঢাকা, বাংলাদেশ",
+            contactPhone: "01748-922264, 01309-114562",
+            footerCopyright: "© ২০২৬-২০২৭। বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ। সর্বস্বত্ব সংরক্ষিত।"
+        };
+
+        function loadWebsiteData() {
+            let data = JSON.parse(localStorage.getItem('barigram_school_cms')) || defaultData;
+            
+            document.querySelector('[data-editable="collegeName"]').textContent = data.collegeName;
+            document.querySelector('[data-editable="motto"]').textContent = data.motto;
+            document.getElementById('headerLogoImg').src = data.logoUrl;
+            document.getElementById('tickerText').innerHTML = data.tickerText;
+            document.getElementById('slide1Bg').style.backgroundImage = `url('${data.slide1Bg}')`;
+            document.querySelector('[data-editable="slide1Title"]').textContent = data.slide1Title;
+            document.querySelector('[data-editable="slide1Desc"]').textContent = data.slide1Desc;
+            document.querySelector('[data-editable="founderName"]').textContent = data.founderName;
+            document.querySelector('[data-editable="founderMessage"]').textContent = data.founderMessage;
+            document.querySelector('[data-editable="principalName"]').textContent = data.principalName;
+            document.querySelector('[data-editable="principalMessage"]').textContent = data.principalMessage;
+            document.querySelector('[data-editable="vpName"]').textContent = data.vpName;
+            document.querySelector('[data-editable="vpTitle"]').textContent = data.vpTitle;
+            document.querySelector('[data-editable="vpMessage"]').textContent = data.vpMessage;
+            document.querySelector('[data-editable="aboutText"]').innerHTML = `<strong>বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ (EIIN: 114562)</strong> হলো ${data.aboutText}`;
+            document.querySelector('[data-editable="contactAddress"]').textContent = data.contactAddress;
+            document.querySelector('[data-editable="contactPhone"]').textContent = data.contactPhone;
+            document.querySelector('[data-editable="footerCopyright"]').textContent = data.footerCopyright;
+        }
+
+        // Carousel & Clock
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('#carousel-slides .slide');
+        function nextSlide() { currentSlide = (currentSlide + 1) % slides.length; showSlide(currentSlide); }
+        function prevSlide() { currentSlide = (currentSlide - 1 + slides.length) % slides.length; showSlide(currentSlide); }
+        function setSlide(i) { currentSlide = i; showSlide(currentSlide); }
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.style.opacity = (i === index) ? "1" : "0";
+            });
+        }
+        setInterval(nextSlide, 5000);
+
+        function updateTime() {
+            const timeEl = document.getElementById('liveTime');
+            if(timeEl) timeEl.textContent = new Date().toLocaleTimeString('bn-BD', { hour12: true });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Login & Admin Panel Handlers
+        function openLoginModal() { document.getElementById('loginModal').classList.remove('hidden'); }
+        function closeLoginModal() { document.getElementById('loginModal').classList.add('hidden'); }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('adminPasswordInput').value;
+            if (pass === ADMIN_SECRET_PASSWORD) {
+                closeLoginModal();
+                document.getElementById('adminPasswordInput').value = '';
+                openAdminPanel();
+                showToast('অ্যাডমিন প্যানেলে স্বাগতম!');
+            } else {
+                alert('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।');
+            }
+        }
+
+        function adminLogout() {
+            closeAdminPanel();
+            showToast('অ্যাডমিন প্যানেল বন্ধ করা হয়েছে।');
+        }
+
+        function openAdminPanel() {
+            let data = JSON.parse(localStorage.getItem('barigram_school_cms')) || defaultData;
+            document.getElementById('edit_collegeName').value = data.collegeName;
+            document.getElementById('edit_motto').value = data.motto;
+            document.getElementById('edit_logoUrl').value = data.logoUrl;
+            document.getElementById('edit_tickerText').value = data.tickerText;
+            document.getElementById('edit_slide1Bg').value = data.slide1Bg;
+            document.getElementById('edit_slide1Title').value = data.slide1Title;
+            document.getElementById('edit_slide1Desc').value = data.slide1Desc;
+            document.getElementById('edit_founderName').value = data.founderName;
+            document.getElementById('edit_founderMessage').value = data.founderMessage;
+            document.getElementById('edit_principalName').value = data.principalName;
+            document.getElementById('edit_principalMessage').value = data.principalMessage;
+            document.getElementById('edit_vpName').value = data.vpName;
+            document.getElementById('edit_vpTitle').value = data.vpTitle;
+            document.getElementById('edit_vpMessage').value = data.vpMessage;
+            document.getElementById('edit_aboutText').value = data.aboutText;
+            document.getElementById('edit_contactAddress').value = data.contactAddress;
+            document.getElementById('edit_contactPhone').value = data.contactPhone;
+
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminPanel() { document.getElementById('adminModal').classList.add('hidden'); }
+
+        function saveAdminData(e) {
+            e.preventDefault();
+            let newData = {
+                collegeName: document.getElementById('edit_collegeName').value,
+                motto: document.getElementById('edit_motto').value,
+                logoUrl: document.getElementById('edit_logoUrl').value,
+                tickerText: document.getElementById('edit_tickerText').value,
+                slide1Bg: document.getElementById('edit_slide1Bg').value,
+                slide1Title: document.getElementById('edit_slide1Title').value,
+                slide1Desc: document.getElementById('edit_slide1Desc').value,
+                founderName: document.getElementById('edit_founderName').value,
+                founderMessage: document.getElementById('edit_founderMessage').value,
+                principalName: document.getElementById('edit_principalName').value,
+                principalMessage: document.getElementById('edit_principalMessage').value,
+                vpName: document.getElementById('edit_vpName').value,
+                vpTitle: document.getElementById('edit_vpTitle').value,
+                vpMessage: document.getElementById('edit_vpMessage').value,
+                aboutText: document.getElementById('edit_aboutText').value,
+                contactAddress: document.getElementById('edit_contactAddress').value,
+                contactPhone: document.getElementById('edit_contactPhone').value,
+                footerCopyright: "© ২০২৬-২০২৭। বাড়ীগ্রাম স্কুল অ্যান্ড কলেজ। সর্বস্বত্ব সংরক্ষিত।"
+            };
+
+            localStorage.setItem('barigram_school_cms', JSON.stringify(newData));
+            loadWebsiteData();
+            closeAdminPanel();
+            showToast('ওয়েবসাইট সফলভাবে আপডেট করা হয়েছে!');
+        }
+
+        function resetDefaultData() {
+            localStorage.removeItem('barigram_school_cms');
+            loadWebsiteData();
+            closeAdminPanel();
+            showToast('ডিফল্ট ডেটা রিস্টোর করা হয়েছে!');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => { toast.classList.add('hidden'); }, 3500);
+        }
+
+        function showMessageModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').textContent = body;
+            document.getElementById('messageModal').classList.remove('hidden');
+        }
+        function closeMessageModal() { document.getElementById('messageModal').classList.add('hidden'); }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function filterNotices() {
+            const input = document.getElementById('noticeSearch').value.toLowerCase();
+            document.querySelectorAll('.notice-item').forEach(item => {
+                item.style.display = item.textContent.toLowerCase().includes(input) ? 'flex' : 'none';
+            });
+        }
+
+        let isBn = true;
+        function toggleLanguage() {
+            isBn = !isBn;
+            document.getElementById('langBtn').textContent = isBn ? 'English' : 'বাংলা';
+        }
+
+        window.onload = loadWebsiteData;
+    </script>
+</body>
+</html>
